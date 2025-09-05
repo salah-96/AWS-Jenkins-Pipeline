@@ -1,19 +1,19 @@
 pipeline {
-    agent any
+    agent {
+        docker {
+            image 'python:3.11-slim'
+            args '-v /var/run/docker.sock:/var/run/docker.sock'
+        }
+    }
 
     stages {
         stage('Checkout') {
             steps {
-                checkout scm
+                git url: 'https://github.com/salah-96/AWS-Jenkins-Pipeline.git', branch: 'main'
             }
         }
 
         stage('Test') {
-            agent {
-                docker {
-                    image 'python:3.11-slim'
-                }
-            }
             steps {
                 sh 'pip install -r requirements.txt'
                 sh 'python -m unittest test_app.py'
