@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git url: 'https://github.com/salah-96/AWS-Jenkins-Pipeline.git', branch: 'main'
+                checkout scm
             }
         }
 
